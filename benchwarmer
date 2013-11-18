@@ -156,7 +156,7 @@ if [ "$SKIPINIT" -ne "1" ]; then
   # We want clean stats from the pg_stat_bgwriter, but those won't show up
   # until after the checkpoint is done.  Wait a bit for the stats to update
   STARTCHECK=`$TESTPSQL -At -c "SELECT checkpoints_req FROM pg_stat_bgwriter"`
-  $TESTPSQL -c "checkpoint"
+  $ADMINPSQL -c "checkpoint"
   echo "Waiting for checkpoint statistics"
   while [ 1 ] ; do
     CHECK=`$TESTPSQL -At -c "SELECT checkpoints_req FROM pg_stat_bgwriter"`
@@ -264,7 +264,7 @@ if [ "$SKIPINIT" -ne "1" ]; then
   fi
   VACUUMSTART=`$RESULTPSQL -A -t -c "SELECT now()"`
   $TESTPSQL -c "vacuum"
-  $TESTPSQL -c "checkpoint"
+  $ADMINPSQL -c "checkpoint"
   $RESULTPSQL -q -c "UPDATE tests SET cleanup=now() - '$VACUUMSTART'::timestamp WHERE test=$TEST"
 fi
 

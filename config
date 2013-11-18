@@ -36,6 +36,7 @@ RESULTPORT="$TESTPORT"
 RESULTDB=results
 RESULTPSQL="psql -h $RESULTHOST -U $RESULTUSER -p $RESULTPORT -d $RESULTDB"
 
+ADMINPSQL="psql -h $TESTHOST -U postgres -p $TESTPORT -d $TESTDB"
 #
 # Main test run customization
 #
