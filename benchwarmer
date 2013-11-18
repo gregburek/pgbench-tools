@@ -330,7 +330,7 @@ echo Server $SERVERHOST, client $CLIENTHOST >> $SETTINGS
 echo >> $SETTINGS
 echo "Server info and settings in postgresql.conf:" >> $SETTINGS
 $TESTPSQL -At -c "select version();" | grep -v " row" >> $SETTINGS
-$TESTPSQL -c "show data_directory" | grep -v " row" >> $SETTINGS
+$ADMINPSQL -c "show data_directory" | grep -v " row" >> $SETTINGS
 $TESTPSQL -c "select name,current_setting(name) from pg_settings where source='configuration file' and not name in ('DateStyle','lc_messages','lc_monetary','lc_numeric','lc_time','listen_addresses','log_directory','log_rotation_age','log_rotation_size','log_truncate_on_rotation');" | grep -v " rows)" >> $SETTINGS
 
 # Operating system information
