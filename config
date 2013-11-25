@@ -5,7 +5,7 @@
 #
 
 BASEDIR=`pwd`
-PGBENCHBIN=/images/psql/usr/lib/postgresql/9.3/bin/pgbench
+PGBENCHBIN=`which pgbench`
 
 # These values are for pgbench 8.4 and later
 TESTDIR="tests"
@@ -24,19 +24,16 @@ TABBED=0
 OSDATA=1
 
 # Test/result database connection
-TESTHOST=`cat ../../../psql | awk '{print $12}'`
-TESTUSER=`cat ../../../psql | awk '{print $6}'`
-TESTPORT=`cat ../../../psql | awk '{print $10}'`
-TESTDB=`cat ../../../psql | awk '{print $8}'`
-TESTPSQL="psql -h $TESTHOST -U $TESTUSER -p $TESTPORT -d $TESTDB"
+TESTHOST=localhost
+TESTUSER=`whoami`
+TESTPORT=5432
+TESTDB=pgbench
 
 RESULTHOST="$TESTHOST"
 RESULTUSER="$TESTUSER"
 RESULTPORT="$TESTPORT"
-RESULTDB="$TESTDB"
-RESULTPSQL="psql -h $RESULTHOST -U $RESULTUSER -p $RESULTPORT -d $RESULTDB"
+RESULTDB=results
 
-ADMINPSQL="psql -h $TESTHOST -U postgres -p $TESTPORT -d $TESTDB"
 #
 # Main test run customization
 #
