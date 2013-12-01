@@ -86,8 +86,8 @@ if [ -n "$MAX_WORKERS" ] ; then
 fi
 
 # psql statements for the test database and the result database
-TESTPSQL="psql -h $TESTHOST -U $TESTUSER -p $TESTPORT -d $TESTDB"
-RESULTPSQL="psql -h $RESULTHOST -U $RESULTUSER -p $RESULTPORT -d $RESULTDB"
+TESTPSQL="psql $TESTURI"
+RESULTPSQL="psql $RESULTURI"
 echo Running tests using:  $TESTPSQL
 echo Storing results using:  $RESULTPSQL
 
@@ -214,7 +214,7 @@ fi
 # Run the main pgbench test
 cd results/$TEST
 echo Script $SCRIPT executing for $CLIENTS concurrent users... 1>&2
-$PGBENCHBIN -f $BASEDIR/$TESTDIR/$SCRIPT -s $SCALE -l -n $TESTLEN -U $TESTUSER -h $TESTHOST -p $TESTPORT -c $CLIENTS $WORKERS $RATEOPT $TESTDB > results.txt &
+$PGBENCHBIN -f $BASEDIR/$TESTDIR/$SCRIPT -s $SCALE -l -n $TESTLEN -c $CLIENTS $WORKERS $RATEOPT $TESTURI > results.txt &
 P=$!
 wait $P
 $RESULTPSQL -q -c "update tests set end_time=now() where test=$TEST"

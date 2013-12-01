@@ -24,15 +24,9 @@ TABBED=0
 OSDATA=1
 
 # Test/result database connection
-TESTHOST=localhost
-TESTUSER=`whoami`
-TESTPORT=5432
-TESTDB=pgbench
+TESTURI=( $TEST_DB )
 
-RESULTHOST="$TESTHOST"
-RESULTUSER="$TESTUSER"
-RESULTPORT="$TESTPORT"
-RESULTDB=results
+RESULTURI=( $RESULT_DB )
 
 #
 # Main test run customization

@@ -8,7 +8,7 @@ if [ ! -f $PGBENCHBIN ]; then
   exit
 fi
 
-TESTPSQL="psql -h $TESTHOST -U $TESTUSER -p $TESTPORT -d $TESTDB"
+TESTPSQL="psql $TESTURI"
 
 # See if this database has all the standard pgbench tables in it
 PGCOUNT=`$TESTPSQL -A -t -c "SELECT count(*)  FROM pg_stat_user_tables WHERE relname IN ('pgbench_history','pgbench_tellers','pgbench_accounts','pgbench_branches')"`
@@ -39,7 +39,7 @@ for SCALE in $SCALES; do
     $TESTPSQL -c "vacuum"
 
     echo Creating new pgbench tables
-    $PGBENCHBIN -i -s $SCALE -h $TESTHOST -U $TESTUSER -p $TESTPORT $TESTDB
+    $PGBENCHBIN -i -s $SCALE $TESTURI
   fi
   #
   # Run the main test
