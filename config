@@ -4,7 +4,7 @@
 # change any of these.
 #
 
-BASEDIR=`pwd`
+BASEDIR=/app/vendor/pgbench-tools/
 PGBENCHBIN=`which pgbench`
 
 # These values are for pgbench 8.4 and later
@@ -18,10 +18,10 @@ TESTDIR="tests"
 SKIPINIT=0
 
 # Set TABBED to 1 to use Javascript for a multi-tabbed display format
-TABBED=0
+TABBED=1
 
 # Set OSDATA to 1 to collect OS data using vmstat and iostat
-OSDATA=1
+OSDATA=0
 
 # Test/result database connection
 TESTURI=( $TEST_DB )
@@ -34,11 +34,11 @@ RESULTURI=( $RESULT_DB )
 
 # Set this to a number only when using pgbench 9.0 or later.  This will set
 # the number of worker threads up to this maximum for each client count
-MAX_WORKERS=""
+MAX_WORKERS="8"
 
 SCRIPT="select.sql"
 SCALES="1 10 100 1000"
-SETCLIENTS="1 2 4 8 16 32"
+SETCLIENTS="1 2 4 8 16 32 64 128 256 400"
 SETTIMES=3
 
 # RUNTIME is in seconds.  If it is specified, then TOTTRANS is ignored.
