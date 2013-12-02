@@ -25,6 +25,13 @@ OSDATA=0
 
 # Test/result database connection
 TESTURI=( $TEST_DB )
+DB=$(echo $TESTURI | perl -lne 'print "$1 $2 $3 $4 $5 $6 $7" if /^postgres:\/\/([^:]+):([^@]+)@(.*?):(.*?)\/(.*?)(\\?.*)?$/')
+DB_URI=( $DB )
+TESTUSER=${DB_URI[0]}
+TESTPASS=${DB_URI[1]}
+TESTHOST=${DB_URI[2]}
+TESTPORT=${DB_URI[3]}
+TESTDB=${DB_URI[4]}
 
 RESULTURI=( $RESULT_DB )
 
